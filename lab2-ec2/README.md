@@ -25,7 +25,7 @@ Here you will connect to the instance from your local machine
 
 3. Execute the following command to connect to your EC2 instance: `ssh -i keypair.pem ec2-user@public-ip-address` (replace keypair.pem with your Key Pair filename and public-ip-address with the IPv4 public IP address of your instance).  When prompted type `yes` and hit return
 
-4. You should not be connected via SSH to your instance.  Let's install and start an apache web server via the commands:
+4. You should now be connected via SSH to your instance.  Let's install and start an apache web server via the commands:
 
 ```bash
 sudo yum -y install httpd
@@ -63,7 +63,7 @@ echo $AMI
 
 This command got the region where the isntance is running from the metadata server (into an environment variable AWS_DEFAULT_REGION), and reads the ID of the latest AMI ID for the Amazon Linux 2 AMI from the Parameter Store in the Systems Manager into an environment variable AMI and echos it to the terminal
 
-5. On the **EC2->Instances** page click on your instance and in the **Description** panel make note of the Subnet ID
+5. On the **EC2->Instances** page click on your instance and in the **Description** panel make note of the Subnet ID.  Execute a command to set it to an environment variable: `SUBNET=your-subnet-id`
 
 6. On the **EC2->Security Groups** page copy the **Security Group ID** for the security group you created when you created the first instance in Task 1.  Execute the following command
 to set it to an environment variable: `SG=your-security-group-id` (replace your-security-group-id with the ID of the one you copied)
@@ -103,4 +103,4 @@ The last line prints out the instance ID which is captured in the environment va
 
 11. Copy and paste the DNS name in a browser tab to verify the web app installation.
 
-12. Close your SSH session, then return to the **EC2->Instances** page and terminate the instances you created. Delete the security group on the **EC2->Security Groups** page. Delete the Key pari on the **EC2->Key Pairs** page
+12. Close your SSH session, then return to the **EC2->Instances** page and terminate the instances you created. Delete the security group on the **EC2->Security Groups** page. Delete the Key pair on the **EC2->Key Pairs** page
