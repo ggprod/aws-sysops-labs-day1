@@ -9,7 +9,7 @@ Create an EC2 instance in the management console
 2. Click **Launch Instance** Select the first AMI image at the top and leave other configuration as-is.  In the **5. Add Tags** section give the instance a tag with key=Name
 and value set with your firstname-lastname and any suffix.
 
-3. In the **6. Configure Security Groups** section. Add a Rule for HTTP.  Leave the Rule configuration as is which allows access from any IP address over port 80.
+3. In the **6. Configure Security Groups** section. Set the radio button to **Create a new security group**.  Give it a name that is firstname-lastname-sg.  Add a Rule for HTTP.  Leave the other configuration as is which allows access from any IP address over port 80.
 
 4. Click **Review and Launch** and then **Launch** and select **Create a new key pair**.  Give the new keypair a name firtname-lastname-key1 and click **Download Key Pair** and
 Save it to your machine and make note of the location.  Click **Launch Instances**
@@ -60,3 +60,47 @@ AMI=$(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-
 
 echo $AMI
 ```
+
+This command got the region where the isntance is running from the metadata server (into an environment variable AWS_DEFAULT_REGION), and reads the ID of the latest AMI ID for the Amazon Linux 2 AMI from the Parameter Store in the Systems Manager into an environment variable AMI and echos it to the terminal
+
+5. On the **EC2->Instances** page click on your instance and in the **Description** panel make note of the Subnet ID
+
+6. On the **EC2->Security Groups** page copy the **Security Group ID** for the security group you created when you created the first instance in Task 1.  Execute the following command
+to set it to an environment variable: `SG=your-security-group-id` (replace your-security-group-id with the ID of the one you copied)
+
+7. Execute the following commands to download and view a script to use as a UserData script for a new instance (a script run when the instance starts)
+
+```bash
+wget https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-100-SYSOPS/v3.3.6/lab-2-ec2-linux/scripts/UserData.txt
+cat UserData.txt
+```
+
+This script installs the apache web-server, downloads a zip file containing a web application, and installs the web application
+
+8. Execute the following command to create a new EC2 instance via the CLI using the above collected data (replace the **firstname-lastname** with your first name and last name)
+
+```bash
+INSTANCE=$(\
+aws ec2 run-instances \
+--image-id $AMI \
+--subnet-id $SUBNET \
+--security-group-ids $SG \
+--user-data file:///home/ec2-user/UserData.txt \
+--instance-type t2.micro \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=firstname-lastname-web-server}]' \
+--query 'Instances[*].InstanceId' \
+--output text \
+)
+
+echo $INSTANCE
+```
+
+The last line prints out the instance ID which is captured in the environment variable INSTANCE
+
+9. Execute the following command to check on the status of the instance: `aws ec2 describe-instances --instance-ids $INSTANCE --query 'Reservations[].Instances[].State.Name' --output text`.  Keep re-executing this command until you see the instance is in the `running` state.
+
+10. Execute the following command to check the DNS name for the instance `aws ec2 describe-instances --instance-ids $INSTANCE --query Reservations[].Instances[].PublicDnsName --output text`
+
+11. Copy and paste the DNS name in a browser tab to verify the web app installation.
+
+12. Close your SSH session, then return to the **EC2->Instances** page and terminate the instances you created. Delete the security group on the **EC2->Security Groups** page. Delete the Key pari on the **EC2->Key Pairs** page
