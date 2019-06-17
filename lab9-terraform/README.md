@@ -1,10 +1,11 @@
-# Mastery Exercise #1: Deploying web servers on AWS
+# Lab 9: Create AWS system with Terraform
 
-For this exercise we'll start simple and build up a more complex web server solution on AWS.
+For this lab we'll build up a web server solution on AWS.
 
 ### Start with a simple EC2 instance
 
-Take a look at the main.tf file and you'll see it has a config to create a basic EC2 instance
+1. Create a main.tf file with a config to create a basic EC2 instance.  Create an AWS provider and set the
+region for it to your assigned region.  Then create an EC2 instance 
 
 ```hcl
 provider "aws" {
