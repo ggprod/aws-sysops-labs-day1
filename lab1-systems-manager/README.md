@@ -23,4 +23,18 @@ You can use the Systems Manager Inventory to collect operating system, applicati
 
 1. In the **Services** menu (in the **Management and Governance** section) click the **Systems Manager**
 
-2. In the left-hand pane click **Managed Instances**
+2. In the left-hand pane click **Managed Instances**, then click the radio button to the left of your instance (which you can identify by the **Name** coloumn), then click
+**Setup Inventory**
+
+3. Take a look at the configurable options on the page, change **Name** to match your instance name, change the **Targets** to **Manually selecting instances**, click the checkbox left of your instance, then click **Setup Inventory** at the bottom-right.  Now the Systems Manager will be checking inventory on your instance every 30 minutes.
+
+4. Click the link in the **Instance ID** coloumn for your instance and click the inventory tab to see the software installed on your instance.  You can select different **Inventory Type** options to browse.
+
+## Task 3: Install a custom application using the Run command
+Here you will install some software on your instance using the **Run command** option
+
+1. In the left-hand pane click **Run command**, then click the orange **Run command** button on the right of the page.
+
+2. Click on the magnifying glass in the search bar and select **Platform Types** then select **Linux**, then click the radio button to the left of **AWS-RunShellScript**
+
+3. In the **Command Parameters** section paste `sudo yum -y install httpd` to install the apache web server
