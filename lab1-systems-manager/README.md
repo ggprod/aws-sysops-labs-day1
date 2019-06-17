@@ -5,7 +5,7 @@ In this lab you'll explore and practice using the AWS Systems Manager to manage 
 An IAM role called **SystemsManagerRole** has been pre-created that provides the necessary policy to manage an instance with Systems Manager.
 Here you will create an instance which specifies this role in the Instance Profile so that you can manage it with the Systems Manager
 
-1. In the **Services** menu (in the **Compute** section) click the **EC2**
+1. Select the appropriate region you've been assigned to, then in the **Services** menu (in the **Compute** section) click the **EC2**
 
 2. Click the **Launch Instance** button, and click the **Select** button for the AMI image at the top of the list
 
@@ -62,4 +62,6 @@ When used with Microsoft Windows, the AWS Systems Manager Session Manager provid
 
 6. In the browser tab with the AWS management console return to the **Parameter Store**, click on your parameter and **Edit** and update the value and then **Save Changes**
 
-7. In the browser tab with the terminal window type, reexecute the previous command again and verify the updated parameter value.
+7. In the browser tab with the terminal window type, re-execute the previous command again and verify the updated parameter value.
+
+8. Return to the **EC2** page and select the instance you created, click on **Actions** then select **Instance State->Terminate**
