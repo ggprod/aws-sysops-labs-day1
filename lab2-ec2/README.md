@@ -7,7 +7,7 @@ Create an EC2 instance in the management console
 1. Select the appropriate region you've been assigned to, then in the **Services** menu (in the **Compute** section) click the **EC2**
 
 2. Click **Launch Instance** Select the first AMI image at the top and leave other configuration as-is.  In the **5. Add Tags** section give the instance a tag with key=Name
-and value set with your firstname-lastname and any suffix.
+and value set with your firstname-lastname-host (replace firstname-lastname with your first name and last name).
 
 3. In the **6. Configure Security Groups** section. Set the radio button to **Create a new security group**.  Give it a name that is firstname-lastname-sg.  Add a Rule for HTTP.  Leave the other configuration as is which allows access from any IP address over port 80.
 
@@ -103,4 +103,4 @@ The last line prints out the instance ID which is captured in the environment va
 
 11. Copy and paste the DNS name in a browser tab to verify the web app installation.
 
-12. Close your SSH session, then return to the **EC2->Instances** page and terminate the second instance you created, leaving the first.
+12. Close your SSH session
