@@ -103,4 +103,4 @@ The last line prints out the instance ID which is captured in the environment va
 
 11. Copy and paste the DNS name in a browser tab to verify the web app installation.
 
-12. Close your SSH session, then return to the **EC2->Instances** page and terminate the instances you created. Delete the security group on the **EC2->Security Groups** page. Delete the Key pair on the **EC2->Key Pairs** page
+12. Close your SSH session, then return to the **EC2->Instances** page and terminate the second instance you created, leaving the first.
