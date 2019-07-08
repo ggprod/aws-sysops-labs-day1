@@ -58,7 +58,7 @@ When used with Microsoft Windows, the AWS Systems Manager Session Manager provid
 
 4. You should see a new browser tab open with a terminal session connected to your instance.
 
-5. In the browser tab with the terminal window type the following command: `aws ssm get-parameters --names` followed by the name of the paramater you entered into the parameter store.  You should see a response that shows you the value.
+5. In the browser tab with the terminal window type the following command: `aws ssm get-parameters --names --region ` followed by your region (e.g. us-east-1 or us-east-2 or us-west-1 or us-west-2) and then the name of the parameter you entered into the parameter store.  You should see a response that shows you the value.
 
 6. In the browser tab with the AWS management console return to the **Parameter Store**, click on your parameter and **Edit** and update the value and then **Save Changes**
 
